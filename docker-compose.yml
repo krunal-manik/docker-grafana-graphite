@@ -1,0 +1,55 @@
+cabot:
+  build: ./cabot
+  links:
+    - db
+    - celery_broker
+    # - smtp_server
+  volumes:
+    - /cabot
+  env_file: cabot_env
+  ports:
+    - "5000:5000"
+
+grafana-graphite:
+  build: ./grafana-graphite
+  volumes:
+    - /grafana-graphite
+  ports:
+    - "3000:3000" #grafana
+    - "8126:8126" #statsd admin
+    - "8125:8125/udp" #statsd udp
+
+db:
+  image: postgres
+  volumes:
+    - /var/lib/cabotdb:/var/lib/postgresql
+  environment:
+    POSTGRESQL_USER: docker
+    POSTGRESQL_PASSWORD: docker
+  ports:
+    - "5432:5432" #pgsql
+
+celery_broker:
+  image: redis
+  ports:
+    - "6379:6379" #redis
+
+
+# smtp_server:
+#   image: tianon/exim4
+
+nginx:
+  image: nginx
+  ports:
+     - "80:80" #nginx
+     - "81:81" #graphite-web
+     - "8080:8080" #cabot
+  links:
+     - cabot
+     - grafana-graphite
+  volumes_from:
+     - cabot
+     - grafana-graphite
+  volumes:
+     - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+  command: /etc/init.d/nginx restart

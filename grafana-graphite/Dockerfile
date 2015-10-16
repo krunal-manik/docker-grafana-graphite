@@ -79,25 +79,11 @@ ADD     ./grafana/dashboards/* /src/dashboards/
 RUN     mkdir /src/dashboard-loader
 ADD     ./grafana/dashboard-loader/dashboard-loader.js /src/dashboard-loader/
 
-# Configure nginx and supervisord
-ADD     ./nginx/nginx.conf /etc/nginx/nginx.conf
+# Configure supervisord
 ADD     ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-
-# ---------------- #
-#   Expose Ports   #
-# ---------------- #
-
-# Grafana
-EXPOSE  80
-
-# StatsD UDP port
-EXPOSE  8125/udp
-
-# StatsD Management port
-EXPOSE  8126
-
-
+RUN     mkdir -p /var/log/supervisor/
+RUN     touch /var/log/supervisor/nginx_error.log
 
 # -------- #
 #   Run!   #
