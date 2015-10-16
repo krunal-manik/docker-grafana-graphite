@@ -36,6 +36,7 @@ celery_broker:
     - "6394:6394" #redis
   volumes:
      - ./redis/redis.conf:/etc/redis/redis.conf:ro
+     - /etc/redis
   command: redis-server /etc/redis/redis.conf
 
 
