@@ -3,7 +3,7 @@ HIPCHAT_ALERT_ROOM=__FIX_ME__
 HIPCHAT_API_KEY=__FIX_ME__
 
 # Hostname of your Graphite server instance
-GRAPHITE_API=http://localhost:8000
+# GRAPHITE_API=http://grafana-graphite:8000
 GRAPHITE_USER=__FIX_ME__
 GRAPHITE_PASS=__FIX_ME__
 
