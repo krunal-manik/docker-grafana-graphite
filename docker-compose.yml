@@ -1,3 +1,25 @@
+db:
+  image: postgres
+  volumes:
+    - /var/lib/cabotdb:/var/lib/postgresql
+  environment:
+    POSTGRES_USER: docker
+    POSTGRES_DB: docker
+    POSTGRES_PASSWORD: docker
+  ports:
+    - "5432:5432" #pgsql
+
+celery_broker:
+  image: redis
+  expose:
+    - "6394:6394"
+  ports:
+    - "6394:6394" #redis
+  volumes:
+     - ./redis/redis.conf:/etc/redis/redis.conf:ro
+     - /etc/redis
+  command: redis-server /etc/redis/redis.conf
+
 cabot:
   build: ./cabot
   links:
@@ -15,30 +37,13 @@ grafana-graphite:
   build: ./grafana-graphite
   volumes:
     - /grafana-graphite
+  expose:
+    - "8000:8000" #graphite
   ports:
     - "3000:3000" #grafana
+    - "8000:8000" #graphite
     - "8126:8126" #statsd admin
     - "8125:8125/udp" #statsd udp
-
-db:
-  image: postgres
-  volumes:
-    - /var/lib/cabotdb:/var/lib/postgresql
-  environment:
-    POSTGRESQL_USER: docker
-    POSTGRESQL_PASSWORD: docker
-  ports:
-    - "5432:5432" #pgsql
-
-celery_broker:
-  image: redis
-  ports:
-    - "6394:6394" #redis
-  volumes:
-     - ./redis/redis.conf:/etc/redis/redis.conf:ro
-     - /etc/redis
-  command: redis-server /etc/redis/redis.conf
-
 
 # smtp_server:
 #   image: tianon/exim4

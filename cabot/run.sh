@@ -6,7 +6,7 @@ export SES_HOST="smtp_server"
 export SES_USER=""
 export SES_PASS=""
 export SES_PORT="25"
-export GRAPHITE_API=http://grafana-graphite:8000
+export GRAPHITE_API=http://grafana-graphite:8000/
 
 python manage.py collectstatic --noinput &&\
 python manage.py compress --force &&\
