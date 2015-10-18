@@ -21,15 +21,23 @@ ADD gunicorn.conf /cabot/gunicorn.conf
 
 # Install dependencies
 RUN pip install -e /cabot/
+RUN find /usr/lib/python2.7/dist-packages -iname "*hipchat*"
+RUN pip uninstall -y cabot-alert-hipchat
+
+RUN git clone https://github.com/krunal-manik/cabot-alert-hipchat /cabot/cabot-alert-hipchat
+RUN pip install -e /cabot/cabot-alert-hipchat/
+
+
 RUN npm install --no-color -g coffee-script less@1.3 --registry http://registry.npmjs.org/
 
 # Set env var
-ENV PATH $PATH:/cabot/
-ENV PYTHONPATH $PYTHONPATH:/cabot/
+ENV PATH $PATH:/cabot/:/cabot-alert-hipchat/
+ENV PYTHONPATH $PYTHONPATH:/cabot/:/cabot-alert-hipchat/
+
 
 # Cabot settings
 ENV DJANGO_SETTINGS_MODULE cabot.settings
-ENV HIPCHAT_URL https://api.hipchat.com/v1/rooms/message
+ENV HIPCHAT_URL https://api.hipchat.com/v2/room/{room_id_or_name}/notification
 ENV LOG_FILE /var/log/cabot
 ENV PORT 5000
 ENV ADMIN_EMAIL you@example.com

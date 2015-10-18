@@ -1,6 +1,8 @@
 # Hipchat integration
-HIPCHAT_ALERT_ROOM=__FIX_ME__
-HIPCHAT_API_KEY=__FIX_ME__
+HIPCHAT_ALERT_ROOM=__HIPCHAT_ALERT_ROOM__
+HIPCHAT_API_KEY=__HIPCHAT_API_KEY__
+
+CABOT_FROM_EMAIL __CABOT_FROM_EMAIL__
 
 # Hostname of your Graphite server instance
 # GRAPHITE_API=http://grafana-graphite:8000

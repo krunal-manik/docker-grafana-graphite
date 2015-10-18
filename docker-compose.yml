@@ -45,8 +45,8 @@ grafana-graphite:
     - "8126:8126" #statsd admin
     - "8125:8125/udp" #statsd udp
 
-# smtp_server:
-#   image: tianon/exim4
+smtp_server:
+  image: tianon/exim4
 
 nginx:
   image: nginx
