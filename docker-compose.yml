@@ -47,8 +47,8 @@ grafana-graphite:
 
 smtp_server:
   image: tianon/exim4
-  ports:
-    - "25:25"
+  expose:
+    - "25"
 
 nginx:
   image: nginx
