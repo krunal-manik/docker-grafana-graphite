@@ -1,8 +1,7 @@
 # Hipchat integration
 HIPCHAT_ALERT_ROOM=__HIPCHAT_ALERT_ROOM__
 HIPCHAT_API_KEY=__HIPCHAT_API_KEY__
-
-CABOT_FROM_EMAIL __CABOT_FROM_EMAIL__
+HIPCHAT_URL=https://api.hipchat.com/v2/room/{room_id_or_name}/notification
 
 # Hostname of your Graphite server instance
 # GRAPHITE_API=http://grafana-graphite:8000
@@ -21,3 +20,10 @@ JENKINS_PASS=_FIX_ME__
 TWILIO_ACCOUNT_SID=_FIX_ME__
 TWILIO_AUTH_TOKEN=_FIX_ME__
 TWILIO_OUTGOING_NUMBER=_FIX_ME__
+
+# Used for pointing links back in alerts etc.
+WWW_HTTP_HOST __WWW_HTTP_HOST__
+WWW_SCHEME http
+
+ADMIN_EMAIL=you@example.com
+CABOT_FROM_EMAIL=__CABOT_FROM_EMAIL__

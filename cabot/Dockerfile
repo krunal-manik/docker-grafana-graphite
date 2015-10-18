@@ -37,18 +37,11 @@ ENV PYTHONPATH $PYTHONPATH:/cabot/:/cabot-alert-hipchat/
 
 # Cabot settings
 ENV DJANGO_SETTINGS_MODULE cabot.settings
-ENV HIPCHAT_URL https://api.hipchat.com/v2/room/{room_id_or_name}/notification
 ENV LOG_FILE /var/log/cabot
 ENV PORT 5000
-ENV ADMIN_EMAIL you@example.com
-ENV CABOT_FROM_EMAIL noreply@example.com
 ENV DEBUG t
 
 ENV DJANGO_SECRET_KEY 2FL6ORhHwr5eX34pP9mMugnIOd3jzVuT45f7w430Mt5PnEwbcJgma0q8zUXNZ68A
-
-# Used for pointing links back in alerts etc.
-ENV WWW_HTTP_HOST cabot.example.com
-ENV WWW_SCHEME http
 
 RUN ["ln","-s","/usr/bin/nodejs","/usr/bin/node"]
 
